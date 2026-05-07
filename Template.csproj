@@ -4,7 +4,7 @@
     <PackageVersion>1.0.0</PackageVersion>
     <PackageId>iksergey.cleanarchitecture.template</PackageId>
     <Title>Clean Architecture Project Template</Title>
-    <Authors>Sergei Kamianetskii</Authors>
+    <Authors>Alfir Mingazov</Authors>
     <Description>Clean Architecture template for microservices with API, Application, Core and Infrastructure layers</Description>
     <PackageTags>dotnet-new;templates;cleanarchitecture;webapi;microservice</PackageTags>
     <TargetFramework>net9.0</TargetFramework>
@@ -12,7 +12,7 @@
     <IncludeBuildOutput>false</IncludeBuildOutput>
     <ContentTargetFolders>content</ContentTargetFolders>
     <NoWarn>$(NoWarn);NU5128</NoWarn>
-    <RepositoryUrl>https://github.com/iksergey/dotnet-clean-architecture-template</RepositoryUrl>
+    <RepositoryUrl>https://github.com/AlfirM/dotnet-clean-architecture-template</RepositoryUrl>
     <PackageLicenseExpression>empty</PackageLicenseExpression>
   </PropertyGroup>
   <ItemGroup>
