@@ -31,12 +31,12 @@ jobs:
           dotnet-version: '9.x.x'
     
       - name: Restore
-        run: dotnet restore working/content/Template.csproj
+        run: dotnet restore Template.csproj
     
       # Собираем пакет в Release-режиме
       - name: Pack
         # Так как csproj лежит не в основной дирестории репозитория - указываем путь
-        run: dotnet pack working/content/Template.csproj --configuration Release --no-restore  
+        run: dotnet pack Template.csproj --configuration Release --no-restore  
     
       # Временный шаг, чтобы понять, куда собирается nuget пакет, чтобы после указать в nuget push
       - name: Debug artifacts
