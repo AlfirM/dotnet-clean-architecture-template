@@ -2,7 +2,7 @@
   <PropertyGroup>
     <PackageType>Template</PackageType>
     <PackageVersion>1.0.0</PackageVersion>
-    <PackageId>iksergey.cleanarchitecture.template</PackageId>
+    <PackageId>alfirm.cleanarchitecture.template</PackageId>
     <Title>Clean Architecture Project Template</Title>
     <Authors>Alfir Mingazov</Authors>
     <Description>Clean Architecture template for microservices with API, Application, Core and Infrastructure layers</Description>
