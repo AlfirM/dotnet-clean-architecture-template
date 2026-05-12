@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <PackageType>Template</PackageType>
-    <PackageVersion>4.0.0</PackageVersion>
+    <PackageVersion>5.0.0</PackageVersion>
     <PackageId>alfirm.cleanarchitecture.template</PackageId>
     <Title>Clean Architecture Project Template</Title>
     <Authors>Alfir Mingazov</Authors>
@@ -12,7 +12,7 @@
     <IncludeBuildOutput>false</IncludeBuildOutput>
     <ContentTargetFolders>content</ContentTargetFolders>
     <NoWarn>$(NoWarn);NU5128</NoWarn>
-    <RepositoryUrl>https://github.com/AlfirM/dotnet-clean-architecture-template</RepositoryUrl>
+    <RepositoryUrl>https://github.com/${{ github.repository_owner }}/${{ github.repository }}</RepositoryUrl>
     <PackageLicenseExpression>empty</PackageLicenseExpression>
   </PropertyGroup>
   <ItemGroup>
