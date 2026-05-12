@@ -1,50 +1,35 @@
-name: Publish Template
+name: Publish Template # Название workflow
 
-# Условия запуска
+# Триггеры запуска
 on:
   push:
     tags:
-      - 'v*'  # Запуск при пуше тега, начинающегося с 'v' >> git push origin v1.0.0
-  workflow_dispatch:  # Возможность ручного запуска из UI github
+ 
+      - 'v*' # Запуск при пуше тега, начинающегося с 'v' >> git push origin v1.0.0 
+  workflow_dispatch: # Возможность ручного запуска из UI github
 
-
-permissions:
-  contents: read # Права на чтения РЕПО
-  packages: write # Запись пакетов для дальнейшей публикации
-
-
-# джоба с использованием Убунту
 jobs:
-  publish: 
-    runs-on: ubuntu-latest
-       
-    # Шаги
+  publish:
+    runs-on: ubuntu-latest # Запуск на Ubuntu
+
+    permissions:
+      contents: read  # Чтение содержимого репозитория
+      packages: write # Запись пакетов
+
     steps:
-      # Копирования репо в рабочее пространство
-      - name: Checkout repository
-        uses: actions/checkout@v4 
+    - uses: actions/checkout@v4 # Клонирование репозитория
     
-      # Установка .Net пакета версии 9.х.х
-      - name: Setup .NET
-        uses: actions/setup-dotnet@v4
-        with:
-          dotnet-version: '9.x.x'
-    
-      - name: Restore
-        run: dotnet restore Template.csproj
-    
-      # Собираем пакет в Release-режиме
-      - name: Pack
-        # Так как csproj лежит не в основной дирестории репозитория - указываем путь
-        run: dotnet pack Template.csproj --configuration Release --no-restore  
-    
-      # Временный шаг, чтобы понять, куда собирается nuget пакет, чтобы после указать в nuget push
-      - name: Debug artifacts
-        run: find . -name "*.nupkg"
-    
-      # Добавление источника для публикации
-      # Публикация с использованием токена авторизации
-      - name: Publish to Github Packages
-        run: |
-          dotnet nuget add source --username ${{ github.actor }} --password ${{ secrets.GITHUB_TOKEN }} --store-password-in-clear-text --name github "https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json"
-          dotnet nuget push bin/Release/*.nupkg --source github --api-key ${{ secrets.GITHUB_TOKEN }}
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '9.x.x' # Установка .NET 9
+
+    - name: Pack
+      run: dotnet pack --configuration Release # Сборка NuGet-пакет в Release-режиме
+
+    # Указание источника пакетов GitHub 
+    # и публикация собранного NuGet-пакета
+    - name: Publish to GitHub Packages
+      run: |
+        dotnet nuget add source --username ${{ github.actor }} --password ${{ secrets.GITHUB_TOKEN }} --store-password-in-clear-text --name github "https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json"
+        dotnet nuget push bin/Release/*.nupkg --source github --api-key ${{ secrets.GITHUB_TOKEN }}
